@@ -14,10 +14,10 @@ The 5-bar manipulator example demonstrates a real engineering application: estim
  
 #### Forward kinematics (mathematical form) and why the inverse is nonlinear
 
-The forward kinematics implemented in `position(t1, t2, coordinates)` computes the end-effector coordinates \((x,y)\) from the two motor angles \(t_1,t_2\).
+The forward kinematics implemented in `position(t1, t2, coordinates)` computes the end-effector coordinates `(x,y)` from the two motor angles `(t_1,t_2)`
 Using the notation in the code, let the link lengths be
 
-The radii are \(r_1\), \(r_2\), \(r_3\) (in the code: \(r_1=5\), \(r_2=12\), \(r_3=13.5/2\)).
+The lengths are `r1`, `r2` and `r3` (in the code: `r1=5`, `r2=12` and `r3=13.5`).
 
 ```math
 r_1,\; r_2,\; r_3 \quad \text{(in the code: } r_1=5,\; r_2=12,\; r_3=13.5/2\text{)}
