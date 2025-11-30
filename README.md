@@ -251,7 +251,9 @@ Because `.run()` allocates a float array: delete[] solution;
 `genetic.hpp `               – Public interfaces, class declarations
 `parameters.hpp`             – All GA parameters and constants
 
-## 7. COMPLETE USAGE CASE
+--- 
+
+# COMPLETE USAGE CASE
 Five-Bar Parallel Manipulator – Inverse Kinematics and Path Planning
 
 This section demonstrates how the GA library is applied to a real engineering problem.
