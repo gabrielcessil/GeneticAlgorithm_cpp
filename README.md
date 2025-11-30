@@ -14,23 +14,23 @@ The library is complete, object-oriented, binary-encoded, and designed to be eas
 
 The algorithm follows the classical evolutionary procedure:
 
-Population Initialization – A group of individuals (candidate solutions) is created with random chromosomes.
+`Population Initialization` – A group of individuals (candidate solutions) is created with random chromosomes.
 
-Fitness Evaluation – Each chromosome is decoded into its floating-point values (genes), passed to the user cost function, and assigned a cost.
+`Fitness Evaluation` – Each chromosome is decoded into its floating-point values (genes), passed to the user cost function, and assigned a cost.
 
-Sorting / Natural Selection – The population is sorted based on cost (lower = better).
+`Sorting / Natural Selection` – The population is sorted based on cost (lower = better).
 
-Parent Selection – Several selectable strategies choose which individuals will breed.
+`Parent Selection` – Several selectable strategies choose which individuals will breed.
 
-Crossover – Two-point binary crossover exchanges segments of genetic material.
+`Crossover` – Two-point binary crossover exchanges segments of genetic material.
 
-Mutation – A controlled percentage of bits are flipped.
+`Mutation` – A controlled percentage of bits are flipped.
 
-Elitism – The best individuals always remain untouched.
+`Elitism` – The best individuals always remain untouched.
 
-Next Generation – Offspring replace the non-elite population.
+`Next Generation` – Offspring replace the non-elite population.
 
-Stopping Conditions – The algorithm stops either when the desired cost is reached or after a defined number of generations.
+`Stopping Conditions` – The algorithm stops either when the desired cost is reached or after a defined number of generations.
 
 Binary representation ensures full control of precision through integer_bits and decimal_bits, while mutation and crossover guarantee exploration.
 
@@ -40,26 +40,16 @@ Binary representation ensures full control of precision through integer_bits and
 
 AlgorithmChoice controls which selection method is used:
 
-0 — Random Selection
+`0 — Random Selection` - Parents are chosen completely at random from the mating pool.
 
-Parents are chosen completely at random from the mating pool.
+`1 — Top-Down` - The best candidate mates with the next best, iteratively down the list.
 
-1 — Top-Down
+`2 — Tournament Selection` - Three candidates are sampled for each parent; the one with lowest cost wins.
 
-The best candidate mates with the next best, iteratively down the list.
-
-2 — Tournament Selection
-
-Three candidates are sampled for each parent; the one with lowest cost wins.
-
-3 — Lottery Selection (Fitness-Proportional)
-
-Each individual receives a number of “tickets” proportional to its fitness.
+`3 — Lottery Selection (Fitness-Proportional)` - Each individual receives a number of “tickets” proportional to its fitness.
 Parents are chosen by sampling over the ticket ranges.
 
-4 — Top-Down With Incest Prevention
-
-Checks the Hamming distance between chromosomes and prevents mating if they are too genetically similar. The threshold reduces automatically if no non-incest pair is available.
+`4 — Top-Down With Incest Prevention` - Checks the Hamming distance between chromosomes and prevents mating if they are too genetically similar. The threshold reduces automatically if no non-incest pair is available.
 
 These variants allow the algorithm to adapt to different difficulty levels, search landscapes, and convergence requirements.
 
