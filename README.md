@@ -64,14 +64,14 @@ Allows direct manipulation of bits (for GA operators)
 
 **Important methods:**
 
-`setGene_Float(float)` — Encodes a float into binary
-`getGene_Float()` — Decodes current binary into float
-`setBit(value, position)` — Set a specific bit (0/1)
-`flipBit(position)` — Mutation operator
-`getBit(position)`
-`updateFloatGene()` — Recomputes floating-point value from bits
-`printGene_Binary()`
-`printGene_Float()`
+ - `setGene_Float(float)` — Encodes a float into binary
+ - `getGene_Float()` — Decodes current binary into float
+ - `setBit(value, position)` — Set a specific bit (0/1)
+ - `flipBit(position)` — Mutation operator
+ - `getBit(position)`
+ - `updateFloatGene()` — Recomputes floating-point value from bits
+ - `printGene_Binary()`
+ - `printGene_Float()`
 
 Because each gene is stored in binary, the GA works naturally with bit-level operations rather than floating-point crossover.
 
@@ -166,7 +166,8 @@ This is the section that helps you integrate the GA into any external project.
  - max iterations
  - boundaries (min/max values)
  - selection algorithm
- - 
+
+   
 Modify this file to tune the GA.
 
 ### 5.2 Step 2 — Write Your Cost Function
@@ -214,12 +215,12 @@ Inside `.run()`:
 
  - The population is initialized.
  - For each generation:
- -- All individuals are evaluated.
- -- They are sorted.
- -- Parents are chosen based on the selected strategy.
- -- Crossover produces new genes.
- -- Mutation injects diversity.
- -- Elitism preserves the best individuals.
+  - All individuals are evaluated.
+  - They are sorted.
+  - Parents are chosen based on the selected strategy.
+  - Crossover produces new genes.
+  - Mutation injects diversity.
+  - Elitism preserves the best individuals.
  - The loop ends when convergence is reached.
 
 ### 5.5 Step 5 — Use the Solution
@@ -239,17 +240,17 @@ Because `.run()` allocates a float array: delete[] solution;
 
 ### 5.7 Optional Features
 
-`ga.showSolution();` → prints the best individual
-`ga.enableResultDisplay();` → prints each generation
-`ga.getSolution();` → retrieve best solution without running again
-`ga.saveSolution();` → persistent global best saved across evaluations
+ - `ga.showSolution();` → prints the best individual
+ - `ga.enableResultDisplay();` → prints each generation
+ - `ga.getSolution();` → retrieve best solution without running again
+ - `ga.saveSolution();` → persistent global best saved across evaluations
 
 ## 6. Project Structure
 
-`main_CircularPath.cpp `     – Full 5-bar manipulator usage case
-`genetic.cpp`                – Full implementation of the GA
-`genetic.hpp `               – Public interfaces, class declarations
-`parameters.hpp`             – All GA parameters and constants
+ - `main_CircularPath.cpp `     – Full 5-bar manipulator usage case
+ - `genetic.cpp`                – Full implementation of the GA
+ - `genetic.hpp `               – Public interfaces, class declarations
+ - `parameters.hpp`             – All GA parameters and constants
 
 --- 
 
