@@ -1,6 +1,11 @@
 # Genetic Algorithm Library in C++
 ## Application to Inverse Kinematics of a 5-Bar Parallel Manipulator
 
+<p align="center">
+  <img src="5bar_mech.png" alt="Algorithm performance" width="500"><br>
+  <b>Figure 1:</b > Conceptual Five-bar Mechanism
+</p>
+
 --- 
 ## 1. Overview
 
@@ -11,8 +16,6 @@ The library is complete, object-oriented, binary-encoded, and designed to be eas
 ### Usage Example: 5-bar Mechanism Inverse Kinematics 
 
 The 5-bar manipulator example demonstrates a real engineering application: estimating which joint angles result in the desired Cartesian coordinates through evolutionary optimization. This is an didactic example, solving nonlinear equations with analytical solution (inverse kinematics) point by point. More useful problems can be further establish.
-
- ![Discrete points in space resulted from optimization versus analytical solution]()
 
 <p align="center">
   <img src="5bar_path.png" alt="Algorithm performance" width="500"><br>
