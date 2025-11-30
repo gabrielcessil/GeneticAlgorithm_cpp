@@ -11,13 +11,13 @@ The library is complete, object-oriented, binary-encoded, and designed to be eas
 ### Usage Example: 5-bar Mechanism Inverse Kinematics 
 
 The 5-bar manipulator example demonstrates a real engineering application: estimating which joint angles result in the desired Cartesian coordinates through evolutionary optimization. This is an didactic example, solving nonlinear equations with analytical solution (inverse kinematics) point by point. More useful problems can be further establish.
- 
+
+ ![Discrete points in space resulted from optimization versus analytical solution](5bar_path.png)
+
 #### Forward kinematics (mathematical form) and why the inverse is nonlinear
 
 The forward kinematics implemented in `position(t1, t2, coordinates)` computes the end-effector coordinates `(x,y)` from the two motor angles `(t_1,t_2)`
-Using the notation in the code, let the link lengths be
-
-The lengths are `r1`, `r2` and `r3` (in the code: `r1=5`, `r2=12` and `r3=13.5`).
+Using the notation in the code, let the link lengths be `r1`, `r2` and `r3` (in the code: `r1=5`, `r2=12` and `r3=13.5`).
 
 ```math
 r_1,\; r_2,\; r_3 \quad \text{(in the code: } r_1=5,\; r_2=12,\; r_3=13.5/2\text{)}
@@ -298,9 +298,6 @@ Because `.run()` allocates a float array: delete[] solution;
 
 # COMPLETE USAGE CASE
 Five-Bar Parallel Manipulator – Inverse Kinematics and Path Planning
-
-![Alt text](5bar_path.png)
-
 
 This section demonstrates how the GA library is applied to a real engineering problem.
 
