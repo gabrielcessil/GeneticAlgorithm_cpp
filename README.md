@@ -19,31 +19,34 @@ Using the notation in the code, let the link lengths be
 
 The radii are \(r_1\), \(r_2\), \(r_3\) (in the code: \(r_1=5\), \(r_2=12\), \(r_3=13.5/2\)).
 
-The code computes intermediate quantities:
-\[
+```math
+r_1,\; r_2,\; r_3 \quad \text{(in the code: } r_1=5,\; r_2=12,\; r_3=13.5/2\text{)}
+```
+
+```math
 e = \frac{r_1(\sin t_1 - \sin t_2)}{2r_3 + r_1\cos t_2 - r_1\cos t_1}, \quad
-f = \frac{r_1 r_3(\cos t_2 + \cos t_1)}{2r_3 + r_1\cos t_2 - r_1\cos t_1}.
-\]
+f = \frac{r_1 r_3(\cos t_2 + \cos t_1)}{2r_3 + r_1\cos t_2 - r_1\cos t_1}
+```
 
-Define also:
-\[
-d = 1 + e^2, \quad
-g = 2\big( e f - e r_1\cos t_1 + e r_3 - r_1\sin t_1 \big), \quad
-h = f^2 - 2f(r_1\cos t_1 - r_3) - 2 r_1 r_3 \cos t_1 + r_3^2 + r_1^2 - r_2^2.
-\]
+```math
+\begin{aligned}
+d &= 1 + e^2 \\
+g &= 2\big( e f - e r_1\cos t_1 + e r_3 - r_1\sin t_1 \big) \\
+h &= f^2 - 2f(r_1\cos t_1 - r_3) - 2 r_1 r_3 \cos t_1 + r_3^2 + r_1^2 - r_2^2
+\end{aligned}
+```
 
-With these symbols the vertical coordinate \(y\) is obtained as a root of:
-\[
-d y^2 + g y + h = 0,
-\]
-so the code selects one root by:
-\[
-y = \frac{-g \pm \sqrt{g^2 - 4 d h}}{2 d}.
-\]
+```math
+d y^2 + g y + h = 0
+```
 
-Finally the horizontal coordinate is recovered by:
-\[
-x = e y + f.
+```math
+y = \frac{-g \pm \sqrt{g^2 - 4 d h}}{2 d}
+```
+
+```math
+x = e y + f
+```
 
 ---
 
