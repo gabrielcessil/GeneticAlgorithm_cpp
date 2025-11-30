@@ -8,6 +8,112 @@ This repository provides a reusable C++ Genetic Algorithm (GA) library together 
 
 The library is complete, object-oriented, binary-encoded, and designed to be easily adapted to any optimization problem. The 5-bar manipulator example demonstrates a real engineering application: estimating which joint angles result in the desired Cartesian coordinates through evolutionary optimization. This is a simplistic example, solving nonlinear equations with analytical solution (inverse kinematics) point by point. More usefu problems can be further establish.
 
+### Forward kinematics (mathematical form) and why the inverse is nonlinear
+
+The forward kinematics implemented in `position(t1, t2, coordinates)` computes the end-effector coordinates \((x,y)\) from the two motor angles \(t_1,t_2\).
+Using the notation in the code, let the link lengths be
+\[
+r_1,\; r_2,\; r_3
+\]
+(inside the code: \(r_1=5,\; r_2=12,\; r_3=13.5/2\)).
+
+The code computes intermediate quantities
+\[
+e = \frac{r_1(\sin t_1 - \sin t_2)}{2r_3 + r_1\cos t_2 - r_1\cos t_1},
+\qquad
+f = \frac{r_1 r_3(\cos t_2 + \cos t_1)}{2r_3 + r_1\cos t_2 - r_1\cos t_1}.
+\]
+Define also
+\[
+d = 1 + e^2,
+\]
+\[
+g = 2\Big( e f - e\,r_1\cos t_1 + e\,r_3 - r_1\sin t_1 \Big),
+\]
+\[
+h = f^2 - 2f\big(r_1\cos t_1 - r_3\big) - 2 r_1 r_3 \cos t_1 + r_3^2 + r_1^2 - r_2^2.
+\]
+
+With these symbols the vertical coordinate \(y\) is obtained as a root of a quadratic
+\[
+d\,y^2 + g\,y + h = 0,
+\]
+so the code selects one root (the `+` or `-` branch) by
+\[
+y = \frac{-g \pm \sqrt{g^2 - 4 d h}}{2 d}.
+\]
+Finally the horizontal coordinate is recovered by the linear relation
+\[
+x = e\,y + f.
+\]
+
+---
+
+#### Why solving the inverse problem \((x_w,y_w)\mapsto (t_1,t_2)\) is hard / nonlinear
+
+1. **Trigonometric rational dependence.**  
+   The intermediate coefficients \(e\) and \(f\) are **ratios** whose numerators and denominators contain \(\sin t_i\) and \(\cos t_i\). Concretely,
+   \[
+   e = \frac{r_1(\sin t_1 - \sin t_2)}{2r_3 + r_1(\cos t_2 - \cos t_1)},
+   \quad
+   f = \frac{r_1 r_3(\cos t_2 + \cos t_1)}{2r_3 + r_1(\cos t_2 - \cos t_1)}.
+   \]
+   Thus \(x\) and \(y\) are **highly nonlinear** functions of \(t_1,t_2\): trig functions appear both in numerators and inside denominators.
+
+2. **Polynomial + radical structure.**  
+   Even after algebraic manipulation, we obtain a quadratic in \(y\) whose coefficients depend nonlinearly on \(\sin t_i,\cos t_i\). The solution uses a square root:
+   \[
+   y = \frac{-g \pm \sqrt{g^2 - 4 d h}}{2 d}.
+   \]
+   The discriminant \(g^2 - 4 d h\) is itself a complicated function of \(t_1,t_2\), which may be non-positive for some angle pairs (leading to no real solution for that branch).
+
+3. **Multiple solutions and branches.**  
+   The presence of \(\pm\) in the quadratic root means there can be **multiple possible (x,y)** for the same pair \((t_1,t_2)\) (branch choice), and conversely for a given \((x_w,y_w)\) there may be **multiple \((t_1,t_2)\)** that satisfy the equations.
+
+4. **Singular denominators.**  
+   The expressions for \(e\) and \(f\) divide by
+   \[
+   \Delta = 2r_3 + r_1\cos t_2 - r_1\cos t_1.
+   \]
+   When \(\Delta\to 0\) the forward formulas blow up (the algebraic manipulation is not valid or becomes numerically unstable), which corresponds to **singular configurations** of the mechanism.
+
+5. **Transcendental coupling.**  
+   Trying to solve for \(t_1,t_2\) given \((x_w,y_w)\) leads to equations where trig functions appear inside rational expressions and square roots. Those are **transcendental** and generally do not admit closed-form algebraic solutions that are practical to compute for every target.
+
+6. **Nonlinear, non-convex search space.**  
+   Small changes in \(t_1,t_2\) can cause large, non-linear changes in \((x,y)\) near singularities or configuration boundaries. This makes direct inversion via simple iterative linear methods (e.g. Newton with a global initial guess) brittle.
+
+---
+
+#### Illustration: inverse as a root-finding problem
+
+To find \((t_1,t_2)\) for a given target \((x_w,y_w)\) we must solve the system
+\[
+\begin{cases}
+x(t_1,t_2) - x_w = 0,\\[4pt]
+y(t_1,t_2) - y_w = 0,
+\end{cases}
+\]
+where \(x(t_1,t_2), y(t_1,t_2)\) are given implicitly by the formulas above. Because \(x,y\) involve \(\sin\), \(\cos\), divisions and square roots, this system is:
+
+- **nonlinear** (trigonometric + rational + radical),
+- **possibly multimodal** (multiple distinct \((t_1,t_2)\) satisfy the equations),
+- **singular** in some regions (denominator zero / discriminant negative).
+
+---
+
+### Conclusion: why use a Genetic Algorithm?
+
+Given the complicated structure above, a *numerical optimizer that does not require analytic inversion or derivatives* is a practical choice. The implemented Genetic Algorithm:
+
+- only needs to **evaluate** the forward kinematics `position(t1,t2)` and a scalar cost (euclidean error),
+- does not rely on Jacobians or initial linearization,
+- can handle multiple feasible solutions and avoid being trapped by singularities by exploring diverse candidate angles,
+- allows rejecting invalid angle sets quickly via `OUT_OF_RANGE`.
+
+Therefore the AG is an appropriate and robust tool for solving the inverse kinematics of this 5-bar manipulator.
+
+
 ---
 
 ## 2. Genetic Algorithm – Conceptual Description
