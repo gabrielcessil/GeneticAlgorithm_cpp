@@ -6,7 +6,7 @@
 
 This repository provides a reusable C++ Genetic Algorithm (GA) library together with a full working example where the GA is applied to solve the inverse kinematics of a 5-bar parallel robotic manipulator.
 
-The library is complete, object-oriented, binary-encoded, and designed to be easily adapted to any optimization problem. The 5-bar manipulator example demonstrates a real engineering application: estimating joint angles from desired Cartesian coordinates through evolutionary optimization.
+The library is complete, object-oriented, binary-encoded, and designed to be easily adapted to any optimization problem. The 5-bar manipulator example demonstrates a real engineering application: estimating which joint angles result in the desired Cartesian coordinates through evolutionary optimization. This is a simplistic example, solving nonlinear equations with analytical solution (inverse kinematics) point by point. More usefu problems can be further establish.
 
 ---
 
@@ -256,6 +256,9 @@ Because `.run()` allocates a float array: delete[] solution;
 
 # COMPLETE USAGE CASE
 Five-Bar Parallel Manipulator – Inverse Kinematics and Path Planning
+
+![Alt text](5bar_path.png)
+
 
 This section demonstrates how the GA library is applied to a real engineering problem.
 
