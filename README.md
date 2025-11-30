@@ -12,7 +12,12 @@ The library is complete, object-oriented, binary-encoded, and designed to be eas
 
 The 5-bar manipulator example demonstrates a real engineering application: estimating which joint angles result in the desired Cartesian coordinates through evolutionary optimization. This is an didactic example, solving nonlinear equations with analytical solution (inverse kinematics) point by point. More useful problems can be further establish.
 
- ![Discrete points in space resulted from optimization versus analytical solution](5bar_path.png)
+ ![Discrete points in space resulted from optimization versus analytical solution]()
+
+<p align="center">
+  <img src="5bar_path.png" alt="Algorithm performance" width="500"><br>
+  <b>Figure 1:</b >Discrete points in space resulted from optimization versus analytical solution
+</p>
 
 #### Forward kinematics (mathematical form) and why the inverse is nonlinear
 
