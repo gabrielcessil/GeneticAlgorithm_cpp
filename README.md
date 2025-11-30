@@ -115,23 +115,23 @@ Passes values to user cost function
 
 Supports mutation, crossover access, and elite preservation
 
-Important methods:
+**Important methods:**
 
-coastUpdate(costFunction) — Recomputes cost using user function
+`coastUpdate(costFunction)` — Recomputes cost using user function
 
-getCoast()
+`getCoast()`
 
-getChromosome()
+`getChromosome()`
 
-setChromosome(newGenes)
+`setChromosome(newGenes)`
 
-resetChromosome() — Initializes chromosome randomly
+`resetChromosome()` — Initializes chromosome randomly
 
-getGeneBit(geneIndex, bitIndex)
+`getGeneBit(geneIndex, bitIndex)`
 
-printChromosome_Float()
+`printChromosome_Float()`
 
-printChromosome_Binary()
+`printChromosome_Binary()`
 
 ### 4.3 Class: GeneticAlgorithm
 
@@ -144,10 +144,10 @@ GeneticAlgorithm ga(&coastFunction);
 
 The cost function must match:
 
-float coastFunction(array<float, number_of_genes>);
+`float coastFunction(array<float, number_of_genes>);`
 
 
-Key behaviors:
+#### Key behaviors:
 
 Generates initial population
 
@@ -163,17 +163,17 @@ Stops when criteria are met
 
 Returns the best solution
 
-Important public methods:
+#### Important public methods:
 
-float* run() → Main execution; returns float array with best genes
+`float* run()` → Main execution; returns float array with best genes
 
-getSolution() → Read best individual at any time
+`getSolution()` → Read best individual at any time
 
-showSolution() → Print best solution
+`showSolution()` → Print best solution
 
-showCommunity(iter) → Print the entire population
+`showCommunity(iter)` → Print the entire population
 
-saveSolution() → Maintain global best across runs
+`saveSolution()` → Maintain global best across runs
 
 Internal steps (automatically executed):
 
